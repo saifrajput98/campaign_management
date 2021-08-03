@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "campaigns", force: :cascade do |t|
     t.string "title"
     t.string "purpose"
-    t.date "established_duration"
-    t.integer "user_id"
+    t.string "estimated_duration"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_campaigns_on_user_id"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "commentable_type"
-    t.integer "commentable_id"
+    t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
@@ -35,8 +38,8 @@ ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
   create_table "discussion_topics", force: :cascade do |t|
     t.string "title"
-    t.integer "user_id"
-    t.integer "campaign_id"
+    t.bigint "user_id"
+    t.bigint "campaign_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_discussion_topics_on_campaign_id"
@@ -45,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
   create_table "sub_tags", force: :cascade do |t|
     t.string "name"
-    t.integer "campaign_id"
-    t.integer "tag_id"
+    t.bigint "campaign_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_sub_tags_on_campaign_id"
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.integer "campaign_id"
+    t.bigint "campaign_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_tags_on_campaign_id"
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_08_02_125324) do
 
   create_table "todo_lists", force: :cascade do |t|
     t.string "objective"
-    t.integer "campaign_id"
+    t.bigint "campaign_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["campaign_id"], name: "index_todo_lists_on_campaign_id"

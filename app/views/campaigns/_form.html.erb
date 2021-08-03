@@ -1,0 +1,38 @@
+<%= form_with model: campaign do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.label :title %>
+      </td>
+      <td>
+        <%= form.text_field :title, class: 'form-control' %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= form.label :purpose %>
+      </td>
+      <td>
+        <%= form.text_field :purpose, class: 'form-control' %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= form.label :estimated_duration %>
+      </td>
+      <td>
+        <%= form.select(:estimated_duration, [['Within 1 week', 'within_1_week'],
+                                              ['Within 1 month', 'within_1_month'],
+                                              ['Within 3 months', 'within_3_months']],
+                                              {include_blank: 'Select'}, {class: 'form-control'}) %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= form.submit class: 'btn btn-dark btn-sm' %></td>
+    </tr>
+  </table>
+<% end %>
+<%= link_to "back", campaigns_path %>

@@ -1,0 +1,2 @@
+module NoviceHelper
+end

@@ -3,7 +3,7 @@ class CreateCampaigns < ActiveRecord::Migration[5.2]
     create_table :campaigns do |t|
       t.string :title
       t.string :purpose
-      t.date :established_duration
+      t.string :estimated_duration
       t.references :user
 
       t.timestamps

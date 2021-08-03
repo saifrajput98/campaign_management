@@ -1,0 +1,2 @@
+class NovicesController < UserController
+end

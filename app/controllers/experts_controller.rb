@@ -1,0 +1,2 @@
+class ExpertsController < UserController
+end
