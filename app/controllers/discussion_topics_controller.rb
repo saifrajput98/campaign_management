@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class DiscussionTopicsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_campaign, only: %i[new index edit]
   before_action :set_discussion_topic, only: %i[show edit update destroy]
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CampaignsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_campaign, only: %i[show edit update destroy]
   def index
     @campaigns = Campaign.all
@@ -13,7 +14,7 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    @campaign = Campaign.new(campaign_params)
+    @campaign = current_user.campaigns.new(campaign_params)
 
     if @campaign.save
       redirect_to @campaign

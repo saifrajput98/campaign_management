@@ -13,11 +13,12 @@
     <tr>
       <td><%= topic.title %></td>
       <td>
-        <%= link_to "Edit", edit_campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm" %> |
-        <%= link_to "Details", campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm" %> |
-        <%= link_to "Delete", campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm",
+        <% if novice_signed_in? %>
+          <%= link_to "Edit", edit_campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm" %> |
+          <%= link_to "Delete", campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm",
                                                                     method: :delete,
                                                                     data: { confirm: 'Are you sure?'} %>
+        <% end %>
       </td>
     </tr>
     <% end %>

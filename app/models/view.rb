@@ -1,18 +1,6 @@
-# frozen_string_literal: true
-
-class User < ApplicationRecord
+class View < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
-  USER_TYPE = {
-    Expert: 'Expert',
-    Novice: 'Novice'
-  }.freeze
-
-  has_many :comments
-  has_many :campaigns
-
-  enum type: USER_TYPE
 end

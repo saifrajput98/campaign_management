@@ -15,6 +15,8 @@ class Campaign < ApplicationRecord
 
   has_one :todo_lists
 
+  belongs_to :user
+
   scope :expert, -> { where(type = 'Expert') }
 
   validates :title, :purpose, :estimated_duration, presence: true
