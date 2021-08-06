@@ -1,11 +1,10 @@
 class CampaignsController < ApplicationController
+  before_action :set_campaign, only: %i[show edit update destroy]
   def index
     @campaigns = Campaign.all
   end
 
-  def show
-    @campaign = Campaign.find(params[:id])  
-  end
+  def show; end
 
   def new
     @campaign = Campaign.new
@@ -21,13 +20,9 @@ class CampaignsController < ApplicationController
     end
   end
 
-  def edit
-    @campaign = Campaign.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @campaign = Campaign.find(params[:id])
-
     if @campaign.update(campaign_params)
       redirect_to @campaign
     else
@@ -36,13 +31,16 @@ class CampaignsController < ApplicationController
   end
 
   def destroy
-    @campaign = Campaign.find(params[:id])
     @campaign.destroy
 
     redirect_to root_path
   end
 
   private
+
+  def set_campaign
+    @campaign = Campaign.find(params[:id])
+  end
 
   def campaign_params
     params.require(:campaign).permit(:title, :purpose, :estimated_duration)

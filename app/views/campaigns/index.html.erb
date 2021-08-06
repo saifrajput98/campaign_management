@@ -21,10 +21,11 @@
         <%= link_to "Details", campaign_path(campaign), class: "btn btn-dark btn-sm" %> |
         <%= link_to 'Destroy',campaign_path(campaign), class: "btn btn-dark btn-sm",
                               method: :delete,
-                              data: { confirm: 'Are you sure?'} %>
+                              data: { confirm: 'Are you sure?'} %> |
+        <%= link_to "Show Topics", campaign_discussion_topics_path(campaign), class: "btn btn-dark btn-sm" %> |
+        <%= link_to "Add Discussion Topics", new_campaign_discussion_topic_path(campaign), class: "btn btn-dark btn-sm" %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-

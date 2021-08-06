@@ -1,8 +1,8 @@
 class Campaign < ApplicationRecord
   DURATION_TYPE = {
-    within_1_week: 'within_1 _week',
-    within_1_month: 'within_1_month',
-    within_3_months: 'within_3_months'
+    within_1_week: 'within 1 week',
+    within_1_month: 'within 1 month',
+    within_3_months: 'within 3 months'
   }.freeze
 
   has_many :users, class_name: "Expert"
@@ -14,6 +14,8 @@ class Campaign < ApplicationRecord
   has_one :todo_lists
 
   scope :expert, -> { where(type = 'Expert')}
+
+  validates :title, :purpose, :estimated_duration, presence: true
 
   enum estimated_duration: DURATION_TYPE
 end

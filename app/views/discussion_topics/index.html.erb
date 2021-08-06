@@ -1,0 +1,26 @@
+<h1>Discussion Topics</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr> 
+  </thead>
+
+  <tbody>
+    <% @discussion_topics.each do |topic| %>
+    <tr>
+      <td><%= topic.title %></td>
+      <td>
+        <%= link_to "Edit", edit_campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm" %> |
+        <%= link_to "Details", campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm" %> |
+        <%= link_to "Delete", campaign_discussion_topic_path(@campaign,topic), class: "btn btn-dark btn-sm",
+                                                                    method: :delete,
+                                                                    data: { confirm: 'Are you sure?'} %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

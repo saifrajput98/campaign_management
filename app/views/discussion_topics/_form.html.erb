@@ -1,0 +1,16 @@
+<%= form_with model: [@campaign, discussion_topic] do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.label :title %>
+      </td>
+      <td>
+        <%= form.text_field :title, class: 'form-control' %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= form.submit class: 'btn btn-dark btn-sm' %></td>
+    </tr>
+  </table>
+<% end -%>

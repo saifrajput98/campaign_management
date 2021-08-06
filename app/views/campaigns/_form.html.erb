@@ -1,4 +1,13 @@
 <%= form_with model: campaign do |form| %>
+ <% if campaign.errors.any? %>
+  <div id="error_explanation" class="container">
+    <ul>
+      <% campaign.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   <table>
     <tr>
       <td>
