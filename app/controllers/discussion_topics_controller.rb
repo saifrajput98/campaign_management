@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class DiscussionTopicsController < ApplicationController
   before_action :set_campaign, only: %i[new index edit]
   before_action :set_discussion_topic, only: %i[show edit update destroy]
 
   def index
-    @discussion_topics = @campaign.discussion_topics  
+    @discussion_topics = @campaign.discussion_topics
   end
 
   def new
@@ -26,7 +28,7 @@ class DiscussionTopicsController < ApplicationController
     if @discussion_topic.update(topics_params)
       redirect_to campaign_discussion_topic_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -45,7 +47,7 @@ class DiscussionTopicsController < ApplicationController
   end
 
   def topics_params
-    params.require(:discussion_topic).permit(:title, :user_id,)
+    params.require(:discussion_topic).permit(:title, :user_id)
   end
 
   def set_campaign

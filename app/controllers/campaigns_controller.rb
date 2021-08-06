@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CampaignsController < ApplicationController
   before_action :set_campaign, only: %i[show edit update destroy]
   def index
@@ -26,7 +28,7 @@ class CampaignsController < ApplicationController
     if @campaign.update(campaign_params)
       redirect_to @campaign
     else
-      render "edit"
+      render 'edit'
     end
   end
 
