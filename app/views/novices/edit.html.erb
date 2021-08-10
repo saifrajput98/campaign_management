@@ -1,0 +1,30 @@
+<h2>Edit Novice</h2>
+<%= form_with model: @novice do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.label :username %>
+      </td>
+      <td>
+        <%= form.text_field :username, class: 'form-control' %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= form.label :status %>
+      </td>
+      <td>
+        <%= form.select(:status, [['Qualified', 'Qualified'],
+                                              ['Not_Qualified', 'Not_Qualified'],
+                                              ['Banned', 'Banned']],
+                                              {include_blank: 'Select'}, {class: 'form-control'}) %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= form.submit class: 'btn btn-dark btn-sm' %></td>
+    </tr>
+  </table>
+<% end %>
+<%= link_to "back", campaigns_path %>

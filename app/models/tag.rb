@@ -2,6 +2,6 @@
 
 class Tag < ApplicationRecord
   has_many :sub_tags
-
-  belongs_to :campaign
+  has_many :taggings, dependent: :destroy
+  has_many :campaigns, through: :taggings
 end

@@ -40,6 +40,15 @@
     </tr>
 
     <tr>
+      <td>
+        <%= form.label :all_tags %>
+      </td>
+      <td>
+        <%= form.text_field :all_tags, class: 'form-control' %>
+      </td>
+    </tr>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <tr>
       <td><%= form.submit class: 'btn btn-dark btn-sm' %></td>
     </tr>
   </table>

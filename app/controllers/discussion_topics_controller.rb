@@ -2,7 +2,7 @@
 
 class DiscussionTopicsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_campaign, only: %i[new index edit]
+  before_action :set_campaign, only: %i[new create index edit]
   before_action :set_discussion_topic, only: %i[show edit update destroy]
 
   def index
@@ -16,10 +16,10 @@ class DiscussionTopicsController < ApplicationController
   def edit; end
 
   def create
-    @discussion_topic = DiscussionTopic.create(topics_params)
-
+    @discussion_topic = @campaign.discussion_topics.create(topics_params)
+    authorize @discussion_topic
     if @discussion_topic.save
-      redirect_to campaign_discussion_topic_path
+      redirect_to campaign_discussion_topics_path
     else
       render 'new'
     end
@@ -27,7 +27,7 @@ class DiscussionTopicsController < ApplicationController
 
   def update
     if @discussion_topic.update(topics_params)
-      redirect_to campaign_discussion_topic_path
+      redirect_to campaign_discussion_topics_path
     else
       render 'edit'
     end

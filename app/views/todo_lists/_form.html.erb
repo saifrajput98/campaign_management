@@ -1,0 +1,17 @@
+<%= form_with model: [@campaign, todo_list] do |form| %>
+  <table>
+    <tr>
+      <td>
+        <%= form.label :objectives %>
+      </td>
+      <td>
+        <%= form.text_area :objective, class: 'form-control' %>
+      </td>
+    </tr>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+
+    <tr>
+      <td><%= form.submit class: 'btn btn-warning btn-sm' %></td>
+    </tr>
+  </table>
+<% end -%>

@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit
+  rescue_from Pundit::NotAuthorizedError do
+    redirect_to campaigns_path, alert: "You are not allowed to create."
+  end
 
-  devise_group :user, contains: [:expert, :novice]
+  devise_group :user, contains: %i[expert novice]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     campaigns_path(current_user)
   end
 

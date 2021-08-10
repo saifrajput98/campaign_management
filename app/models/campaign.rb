@@ -8,12 +8,13 @@ class Campaign < ApplicationRecord
   }.freeze
 
   has_many :users, class_name: 'Expert'
-  has_many :tags
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
   has_many :sub_tags
   has_many :discussion_topics
   has_many :comments, as: :commentable
 
-  has_one :todo_lists
+  has_many :todo_lists
 
   belongs_to :user
 
@@ -22,4 +23,22 @@ class Campaign < ApplicationRecord
   validates :title, :purpose, :estimated_duration, presence: true
 
   enum estimated_duration: DURATION_TYPE
+
+  # setter method
+  def all_tags=(names)
+    self.tags = names.split(",").map do |name|
+      Tag.where(name: name).first_or_create!
+    end
+  end
+
+  #getter method
+  def all_tags
+    tags.map(&:name).join(", ")
+  end
+
+  def self.search(term)
+    campaigns = all
+    campaigns = Campaign.joins(:tags).where('lower(name) ILIKE ?',"%#{term}%") if term&.downcase.present?
+    campaigns
+  end
 end

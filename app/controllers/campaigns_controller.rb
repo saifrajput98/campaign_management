@@ -3,8 +3,9 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_campaign, only: %i[show edit update destroy]
+
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.search(params[:term])
   end
 
   def show; end
@@ -15,9 +16,9 @@ class CampaignsController < ApplicationController
 
   def create
     @campaign = current_user.campaigns.new(campaign_params)
-
+    authorize @campaign
     if @campaign.save
-      redirect_to @campaign
+      redirect_to campaigns_path
     else
       render 'new'
     end
@@ -27,7 +28,7 @@ class CampaignsController < ApplicationController
 
   def update
     if @campaign.update(campaign_params)
-      redirect_to @campaign
+      redirect_to campaigns_path
     else
       render 'edit'
     end
@@ -36,7 +37,7 @@ class CampaignsController < ApplicationController
   def destroy
     @campaign.destroy
 
-    redirect_to root_path
+    redirect_to campaigns_path
   end
 
   private
@@ -46,6 +47,6 @@ class CampaignsController < ApplicationController
   end
 
   def campaign_params
-    params.require(:campaign).permit(:title, :purpose, :estimated_duration)
+    params.require(:campaign).permit(:title, :purpose, :estimated_duration, :all_tags, :user_id)
   end
 end

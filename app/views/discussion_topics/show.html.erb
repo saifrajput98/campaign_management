@@ -8,4 +8,8 @@
 
   </tbody>
 </table>
+
 <%= link_to "Back", campaigns_path %>
+
+<%= render partial: "comments/comments", locals: {commentable: @discussion_topic } %>
+<%= render partial: "comments/form", locals: {commentable: @discussion_topic } %>
